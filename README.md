@@ -1,4 +1,4 @@
 queue-management-system
 =======================
 
-Queue Management System - monolith architecture approach
+Queue Management System - the monolith architecture approach

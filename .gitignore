@@ -1,2 +1,16 @@
 .gradle
 build/
+/buildSrc/lib
+/buildSrc/build
+/buildSrc/*.ipr
+/buildSrc/*.iws
+/buildSrc/*.iml
+/buildSrc/out
+/intellij
+.idea
+*.iml
+*.ipr
+*.iws
+*.classpath
+*.project
+*.settings

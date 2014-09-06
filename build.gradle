@@ -1,0 +1,58 @@
+buildscript {
+    ext {
+        springBootVersion = '1.1.5.RELEASE'
+    }
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven { url "http://repo.spring.io/milestone" }
+    }
+
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+        classpath 'org.flywaydb:flyway-gradle-plugin:3.0'
+    }
+}
+
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+apply plugin: 'groovy'
+apply plugin: 'spring-boot'
+
+//sourceCompatibility = 1.7
+version = '1.0'
+
+ext {
+    ext.groovyVersion        = "2.3.4"
+    ext.jodaVersion          = "2.3"
+    ext.junitVersion         = "4.11"
+    ext.guavaVersion         = "17.0"
+    ext.restassuredVersion   = "2.3.2"
+    ext.jsonpathVersion      = "0.9.1"
+}
+
+repositories {
+    mavenCentral()
+    maven { url "http://repo.spring.io/milestone" }
+}
+
+dependencies {
+    compile "org.codehaus.groovy:groovy-all:${groovyVersion}"
+    compile "com.google.guava:guava:${guavaVersion}"
+    compile "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
+    compile "org.springframework.data:spring-data-commons:1.8.1.RELEASE"
+    compile "org.springframework.data:spring-data-mongodb:1.5.1.RELEASE"
+
+    testCompile "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
+    testCompile "org.spockframework:spock-core:0.7-groovy-2.0"
+    testCompile "org.spockframework:spock-spring:0.7-groovy-2.0"
+    testCompile "com.jayway.jsonpath:json-path-assert:${jsonpathVersion}"
+    testCompile "junit:junit:${junitVersion}"
+    testCompile "info.cukes:cucumber-junit:1.1.8"
+    testCompile "info.cukes:cucumber-groovy:1.1.8"
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.0'
+}
