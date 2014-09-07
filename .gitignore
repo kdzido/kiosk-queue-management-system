@@ -1,5 +1,6 @@
 .gradle
 build/
+out
 /buildSrc/lib
 /buildSrc/build
 /buildSrc/*.ipr
@@ -14,3 +15,4 @@ build/
 *.classpath
 *.project
 *.settings
+*.log

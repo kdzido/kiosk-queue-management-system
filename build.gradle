@@ -1,3 +1,5 @@
+//import org.apache.tools.ant.taskdefs.condition.Os
+
 buildscript {
     ext {
         springBootVersion = '1.1.5.RELEASE'
@@ -15,11 +17,6 @@ buildscript {
     }
 }
 
-apply plugin: 'idea'
-apply plugin: 'eclipse'
-apply plugin: 'groovy'
-apply plugin: 'spring-boot'
-
 //sourceCompatibility = 1.7
 version = '1.0'
 
@@ -30,11 +27,30 @@ ext {
     ext.guavaVersion         = "17.0"
     ext.restassuredVersion   = "2.3.2"
     ext.jsonpathVersion      = "0.9.1"
+
+
+    // Browser test automation
+    drivers = ["chrome"]
+    ext.gebVersion = '0.9.3'
+    ext.seleniumVersion = '2.42.2'
+    ext.chromeDriverVersion = '2.10'
+    ext.phantomJsVersion = '1.9.7'
 }
+
+
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+apply plugin: 'java'
+apply plugin: 'groovy'
+apply plugin: 'spring-boot'
+//apply from: "gradle/osSpecificDownloads.gradle"
+
+
 
 repositories {
     mavenCentral()
     maven { url "http://repo.spring.io/milestone" }
+    jcenter()
 }
 
 dependencies {
@@ -49,9 +65,48 @@ dependencies {
     testCompile "org.spockframework:spock-spring:0.7-groovy-2.0"
     testCompile "com.jayway.jsonpath:json-path-assert:${jsonpathVersion}"
     testCompile "junit:junit:${junitVersion}"
-    testCompile "info.cukes:cucumber-junit:1.1.8"
-    testCompile "info.cukes:cucumber-groovy:1.1.8"
+
+//    testCompile "info.cukes:cucumber-junit:1.1.8"
+//    testCompile "info.cukes:cucumber-groovy:1.1.8"
+//    testCompile "info.cukes:cucumber-java:1.1.8"
+
+    testCompile "org.gebish:geb-spock:$gebVersion"
+    testCompile "org.gebish:geb-junit4:$gebVersion"
+    // Drivers
+    testCompile "org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion"
+
 }
+
+
+//drivers.each { driver ->
+//    task "${driver}Test"(type: Test) {
+//        reports {
+//            html.destination = reporting.file("$name/tests")
+//            junitXml.destination = file("$buildDir/test-results/$name")
+//        }
+//
+//        outputs.upToDateWhen { false }  // Always run tests
+//
+//        systemProperty "geb.build.reportsDir", reporting.file("$name/geb")
+//        systemProperty "geb.env", driver
+//
+//        // If you wanted to set the baseUrl in your build…
+//        // systemProperty "geb.build.baseUrl", "http://myapp.com"
+//    }
+//}
+//
+//chromeTest {
+//    dependsOn unzipChromeDriver
+//
+//    def chromedriverFilename = Os.isFamily(Os.FAMILY_WINDOWS) ? "chromedriver.exe" : "chromedriver"
+//    systemProperty "webdriver.chrome.driver", new File(unzipChromeDriver.outputs.files.singleFile, chromedriverFilename).absolutePath
+//}
+//
+//test {
+//    dependsOn drivers.collect { tasks["${it}Test"] }
+//    enabled = false
+//}
+
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.0'

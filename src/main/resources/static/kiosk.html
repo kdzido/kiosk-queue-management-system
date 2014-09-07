@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>QMS - Kiosk</title>
+    
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+		
+	<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>	
+	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+	<script type="text/javascript" src="/js/kiosk.js"></script>
+</head>
+
+<body>
+
+
+    <script id="requestTicket" type="text/template">
+        <div class="jumbotron">
+        <h3>Please choose issue category</h3>
+        <form id="requestTicketForm" enctype="multipart/form-data" action="/qms/queues" method="post">
+            <div class="form-group">
+                <span>Category </span>
+                <select class="selectQueue" id="queueCategory"/>
+            </div>
+            <button id="submitRequestTicket" type="submit" class="btn btn-success">Request ticket</button>
+        </form>
+        </div>
+    </script>
+    
+    <script id="queueList" type="text/template">
+    <p id="infobox" class="bg-success">Ticket request was successful</p>
+    <p id="errorinfobox" class="bg-danger">Error during requesting ticket.</p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Category</th>
+                <th>Awaiting</th>
+                <th>Last ticket</th>
+                <th>Face</th>
+                <th>Consultant</th>
+                <th>Request</th>
+            </tr>
+        </thead>  
+        <tbody id="queueTableBody">
+        </tbody>              
+    </table>    
+    </script>
+    
+    <script id="queueTableRow" type="text/template">
+        <tr>
+            <td><%= queueId %></td>
+            <td><%= category %></td>
+            <td><%= awaitingNo %></td>
+            <td><%= lastTicketId %></td>
+            <td><img class="img-circle avatar" alt="User" src="../img/anon-avatar.png" style="width: 50px; height: 50px"></td>
+            <td><%= consultantName %></td>
+            <td><button class="btn btn-default requestbutton">Request ticket</button></td>
+        </tr>
+    </script>
+    
+    <div class="container">
+        <div class="page-header">            
+            <ul class="nav nav-pills pull-right">
+                <li id="requestButton" class="active"><a href="#" id="">Request ticket</a></li>
+                <li id="listButton"><a href="#">Queue List</a></li>
+            </ul>
+            <h1>Request ticket</h1>
+        </div>
+        <div id="main">
+        </div>
+	</div>
+
+</body>
+
+</html>
