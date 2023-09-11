@@ -1,7 +1,7 @@
-queue-management-system
+kiosk-queue-management-system
 =======================
 
-Queue Management System - the monolith architecture approach
+Kiosk Queue Management System - the monolith architecture approach
 
 run with:
 ./gradlew bootRun
